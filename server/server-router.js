@@ -36,6 +36,16 @@ const PicSavePath = path.join(__dirname,'../public/articles')
 const MdSavePath = path.join(__dirname,'./mysql/articles')
 
 
+let options = {
+    flags: 'a',     // append模式
+    encoding: 'utf8',  // utf8编码
+};
+
+let stdout = fs.createWriteStream('./stdout.log', options);
+let stderr = fs.createWriteStream('./stderr.log', options);
+
+// 创建logger
+let logger = new console.Console(stdout, stderr);
 
 //获取验证码接口
 router.get('/captcha',async (ctx)=>{
@@ -131,7 +141,7 @@ router.post('/userInfo', async (ctx) => {
             return ctx.body={user:user[0].name,code:0,redirect:'/'}
         }
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={ msg:'服务器正在维护，请稍候再试',code:1 }
     }
 });
@@ -171,7 +181,7 @@ router.post('/userInit',async (ctx)=>{
         return ctx.body={code:1}
 
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1}
     }
 
@@ -183,7 +193,7 @@ router.post('/userLogout',async (ctx)=>{
 
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1}
     }
 
@@ -200,7 +210,7 @@ router.post('/users-backend/getAll',async (ctx)=>{
 
         return ctx.body={code:0,users:users}
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1,msg:'数据库查询出错'}
     }
 
@@ -215,7 +225,7 @@ router.post('/user-backend/delete',async (ctx)=>{
         await mysql.query(`delete from user where id='${ctx.request.body.id}'`)
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1,msg:'数据删除出错！'}
     }
 });
@@ -241,7 +251,7 @@ router.post('/article-backend/upload',async (ctx) => {
         await mysql.query(`insert into arti (title,intro,file,pic,cls,create_time,pageviews) values
                         (?,?,?,?,?,?,?)`,[title,intro,filePath,picPath,cls,create_time,0])
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         //数据库操作在后，如果数据库插入失败，应该讲之前存储的数据删除
         if(fs.existsSync(picPath)){ fs.unlinkSync(picPath)}
         if(fs.existsSync(filePath)){ fs.unlinkSync(filePath)}
@@ -258,7 +268,7 @@ router.post('/articles/getAll',async (ctx) => {
         articles = JSON.parse(JSON.stringify(articles))
         return ctx.body={code:0,articles:articles}
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1,msg:'数据库查询出错'}
     }
 });
@@ -284,7 +294,7 @@ router.post('/article-backend/alter',async (ctx) => {
 
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1,msg:'数据修改出错！'}
     }
 });
@@ -304,7 +314,7 @@ router.post('/articles-backend/delete',async (ctx) => {
 
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1,msg:'数据删除出错！'}
     }
 });
@@ -319,7 +329,7 @@ router.post('/articles/getContent',async (ctx)=>{
         let res = await read(Ar.file)
         return ctx.body={code:0,data:res,artiId:Ar.id}
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 
@@ -332,7 +342,7 @@ router.post('/topics/add',async (ctx)=>{
         await mysql.query(`insert into topic (topic) values ('${add}')`)
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 
@@ -344,7 +354,7 @@ router.post('/topics/getAll',async (ctx)=>{
         let res = await mysql.query(`select * from topic`)
         return ctx.body={code:0,data:res}
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1,msg:'服务器端出错，请检查代码'}
     }
 
@@ -360,7 +370,7 @@ router.post('/topic/delete',async (ctx) => {
         await mysql.query(`delete from topic where topic='${ctx.request.body.tp}'`)
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1,msg:'数据删除出错！'}
     }
 });
@@ -374,7 +384,7 @@ router.post('/topic/alter',async (ctx) => {
         await mysql.query(`update topic set articles='${ctx.request.body.alter}' where id='${ctx.request.body.id}'`)
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e);
+        logger.error(e);
         return ctx.body={code:1,msg:'数据修改出错！'}
     }
 });
@@ -393,7 +403,7 @@ router.post('/articles/handInComment',async (ctx)=>{
         return ctx.body={code:0}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -416,7 +426,7 @@ router.post('/articles/commentsCheck',async (ctx)=>{
         return ctx.body={code:1}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -432,7 +442,7 @@ router.post('/articles/getComments',async (ctx)=>{
         return ctx.body={code:0,data:t}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -445,7 +455,7 @@ router.post('/articles/getOneComments',async (ctx)=>{
         return ctx.body={code:0,data:t}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -466,7 +476,7 @@ router.post('/articles/like',async (ctx)=>{
         return ctx.body={code:0,msg:'收到点赞！感谢您的鼓励！'}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -485,7 +495,7 @@ router.post('/leaveMsg',async (ctx)=>{
         return ctx.body={code:0,msg:'已收到留言！请留意后续邮箱回复，谢谢！'}
 
     }catch(e){
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1,msg:'系统繁忙，请稍候再试'}
     }
 
@@ -503,7 +513,7 @@ router.post('/operations/getInfo',async (ctx)=>{
         return ctx.body={code:0,data:t}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -519,7 +529,7 @@ router.post('/operations/getMsg',async (ctx)=>{
         return ctx.body={code:0,data:t}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -542,7 +552,7 @@ router.post('/operations/msgCheck',async (ctx)=>{
         return ctx.body={code:1}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -557,7 +567,7 @@ router.post('/operations/getAll',async (ctx)=>{
         return ctx.body={code:0,data:t}
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -579,7 +589,7 @@ router.post('/operations/db_operation',async ctx=>{
 
         return ctx.body={code:0,msg:res}
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1,msg:'查询出错！'}
     }
 
@@ -597,7 +607,7 @@ router.post('/operations/file_operation/read_dir',async ctx=>{
         let l = fs.readdirSync(filename)
         return ctx.body={code:0,l:l}
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -611,7 +621,7 @@ router.post('/operations/file_operation/mk_dir',async ctx=>{
         fs.mkdirSync(dirName)
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -632,7 +642,7 @@ router.post('/operations/file_operation/upload_file',async ctx=>{
 
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
@@ -646,7 +656,7 @@ router.post('/operations/file_operation/rm_dir',async ctx=>{
 
         return ctx.body={code:0}
     }catch (e) {
-        console.log(e)
+        logger.error(e)
         return ctx.body={code:1}
     }
 })
