@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28952d86-008c-4e2b-9299-131141f3dd41" name="Default Changelist" comment="" />
+    <list default="true" id="28952d86-008c-4e2b-9299-131141f3dd41" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -70,7 +72,11 @@
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -122,7 +128,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/components/Tools/Collapse/index.js" />
         <option value="$PROJECT_DIR$/components/pagesStyle/aboutMe-style.js" />
         <option value="$PROJECT_DIR$/components/BackendDetail/article/upload.js" />
         <option value="$PROJECT_DIR$/components/BackendDetail/article/comment.js" />
@@ -173,6 +178,7 @@
         <option value="$PROJECT_DIR$/lib/fileOparations.js" />
         <option value="$PROJECT_DIR$/components/BackendDetail/operations/fileOperation.js" />
         <option value="$PROJECT_DIR$/server/server-router.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -216,6 +222,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.1" />
@@ -343,12 +350,12 @@
       <workItem from="1575470827742" duration="685000" />
       <workItem from="1575513839870" duration="11375000" />
       <workItem from="1575537674808" duration="3547000" />
-      <workItem from="1575606084869" duration="719000" />
+      <workItem from="1575606084869" duration="962000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="605492000" />
+    <option name="totallyTimeSpent" value="605735000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -361,9 +368,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49238577" visible="true" weight="0.23660715" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49238577" visible="true" weight="0.23660715" />
       <window_info id="Structure" order="1" sideWeight="0.50507617" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" sideWeight="0.5076142" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -377,7 +383,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50074404" side_tool="true" weight="0.35620916" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3289689" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3289689" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.32843137" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -857,7 +863,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
