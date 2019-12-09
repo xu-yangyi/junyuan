@@ -110,7 +110,7 @@ router.post('/userInfo', async (ctx) => {
             await mysql.query(`insert into user (name,pwd,email) values ('${data.user}','${encode(data.pwd)}','${data.email}')`)
 
             ctx.cookies.set('uid', Buffer.from(data.user).toString('base64'), {
-                domain: 'localhost', // 写cookie所在的域名
+                domain: 'xujunyuan.com', // 写cookie所在的域名
                 path: '/', // 写cookie所在的路径
                 maxAge: 24 * 60 * 60 * 1000, // cookie有效时长
                 httpOnly: false, // 是否只用于http请求中获取
@@ -132,7 +132,7 @@ router.post('/userInfo', async (ctx) => {
             }
 
             ctx.cookies.set('uid', Buffer.from(data.user).toString('base64'), {
-                domain: 'localhost', // 写cookie所在的域名
+                domain: 'xujunyuan.com', // 写cookie所在的域名
                 path: '/', // 写cookie所在的路径
                 maxAge: 24 * 60 * 60 * 1000, // cookie有效时长
                 httpOnly: false, // 是否只用于http请求中获取

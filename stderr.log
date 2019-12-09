@@ -1,0 +1,45 @@
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '快速上手'',file='/app/junyuan/server/mysql/articles/20191109102058.md',pic='' at line 1
+    at Query.Sequence._packetToError (/app/junyuan/node_modules/mysql/lib/protocol/sequences/Sequence.js:47:14)
+    at Query.ErrorPacket (/app/junyuan/node_modules/mysql/lib/protocol/sequences/Query.js:77:18)
+    at Protocol._parsePacket (/app/junyuan/node_modules/mysql/lib/protocol/Protocol.js:291:23)
+    at Parser._parsePacket (/app/junyuan/node_modules/mysql/lib/protocol/Parser.js:433:10)
+    at Parser.write (/app/junyuan/node_modules/mysql/lib/protocol/Parser.js:43:10)
+    at Protocol.write (/app/junyuan/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/app/junyuan/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/app/junyuan/node_modules/mysql/lib/Connection.js:525:10)
+    at Socket.emit (events.js:210:5)
+    at addChunk (_stream_readable.js:309:12)
+    --------------------
+    at Protocol._enqueue (/app/junyuan/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at PoolConnection.query (/app/junyuan/node_modules/mysql/lib/Connection.js:201:25)
+    at /app/junyuan/server/mysql/index.js:20:32
+    at Ping.onOperationComplete (/app/junyuan/node_modules/mysql/lib/Pool.js:110:5)
+    at Ping.<anonymous> (/app/junyuan/node_modules/mysql/lib/Connection.js:525:10)
+    at Ping._callback (/app/junyuan/node_modules/mysql/lib/Connection.js:491:16)
+    at Ping.Sequence.end (/app/junyuan/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Ping.Sequence.OkPacket (/app/junyuan/node_modules/mysql/lib/protocol/sequences/Sequence.js:92:8)
+    at Protocol._parsePacket (/app/junyuan/node_modules/mysql/lib/protocol/Protocol.js:291:23)
+    at Parser._parsePacket (/app/junyuan/node_modules/mysql/lib/protocol/Parser.js:433:10) {
+  code: 'ER_PARSE_ERROR',
+  errno: 1064,
+  sqlMessage: "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '快速上手'',file='/app/junyuan/server/mysql/articles/20191109102058.md',pic='' at line 1",
+  sqlState: '42000',
+  index: 0,
+  sql: "update arti set title='Webpack快速上手',intro='webpack这个工具的确有点尴尬，很重要，但随着各大框架的集成，又似乎没那么‘重要了，如果不深究的话webpack的确适合'快速上手'',file='/app/junyuan/server/mysql/articles/20191109102058.md',pic='/app/junyuan/public/articles/20191109102058.png',cls='tec',create_time='20191109102058',pageviews='36' where id='36'"
+}
+TypeError: Cannot read property 'pageviews' of undefined
+    at /app/junyuan/server/server-router.js:328:60
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async session (/app/junyuan/node_modules/koa-session/index.js:41:7)
+TypeError: Cannot read property 'pageviews' of undefined
+    at /app/junyuan/server/server-router.js:328:60
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async session (/app/junyuan/node_modules/koa-session/index.js:41:7)
+TypeError: Cannot read property 'pageviews' of undefined
+    at /app/junyuan/server/server-router.js:328:60
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async session (/app/junyuan/node_modules/koa-session/index.js:41:7)
+TypeError: Cannot read property 'pageviews' of undefined
+    at /app/junyuan/server/server-router.js:328:60
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async session (/app/junyuan/node_modules/koa-session/index.js:41:7)

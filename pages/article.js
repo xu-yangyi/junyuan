@@ -108,7 +108,12 @@ const Article = (props) => {
             <ArticleWrapper>
                     <div className={'markdown-body'} dangerouslySetInnerHTML={{__html:article}}/>
                     <div style={{textAlign:'center',marginTop:'60px'}}>--- E n d ---</div>
-            </ArticleWrapper>
+	            <div style={{textAlign:'center',marginTop:'2px',fontSize:'14px',fontWeight:'bold'}}>欢迎分享，欢迎讨论<br/>也欢迎关注我的其他平台账号：<br/>
+                        【知乎】均远<br/>
+                        【公众号】佛系前端<br/>
+                        【GitHub】JunYuanHub<br/>
+                        【个人博客】xujunyuan.com</div>            
+</ArticleWrapper>
             <Menu>
                 <div>
                     <Tooltip

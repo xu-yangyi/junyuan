@@ -9,7 +9,7 @@ const config = {
     database: {
         DATABASE: 'xujunyuan', //数据库名称
         USERNAME: 'root', //mysql用户名
-        PASSWORD: 'Xuyangyi1998', //mysql密码
+        PASSWORD: 'YangYisql#1998', //mysql密码
         PORT: '3306', //mysql端口号
         HOST: 'localhost' //服务器ip
     }
