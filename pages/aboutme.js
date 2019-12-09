@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
 import { Collapse } from 'antd';
 import { Wrapper,Header } from "../components/pagesStyle/aboutMe-style"
 
@@ -6,6 +6,9 @@ const { Panel } = Collapse;
 
 
 const AboutMe= ()=>{
+    useEffect(()=>{
+        document.title='均远--关于我'
+    },[])
     
 
     return(

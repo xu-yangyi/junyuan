@@ -12,6 +12,10 @@ const Index=()=>{
 
 
     useEffect(()=>{
+        document.title='均远--壹个佛系程序猿的个人博客'
+    },[])
+
+    useEffect(()=>{
         const a = setInterval(()=>{ setDay(pre=>{return !pre}) },22000)
         intervalRef.current=a
         setDay(true)

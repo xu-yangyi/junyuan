@@ -16,6 +16,9 @@ const Register = function (props) {
     const [count,setCount] = useState('')
 
     useEffect(()=>{
+        document.title='均远--用户注册'
+    },[])
+    useEffect(()=>{
         props.errorMsg('');
     },[])
     useEffect(()=>{

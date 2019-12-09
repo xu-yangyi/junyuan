@@ -8,6 +8,9 @@ import Social from "../components/AdditionList/Social"
 
 
 class Home extends React.Component{
+    componentDidMount() {
+        document.title='均远--壹个佛系程序猿的个人博客'
+    }
 
     render() {
         return(

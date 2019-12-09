@@ -322,18 +322,16 @@ router.post('/articles-backend/delete',async (ctx) => {
 router.post('/articles/getContent',async (ctx)=>{
     let num = ctx.request.body.file
     try{
-        let Ar = await mysql.query(`select id,file,pageviews from arti where create_time='20${num}'`)
+        let Ar = await mysql.query(`select id,file,pageviews,title from arti where create_time='20${num}'`)
         Ar = JSON.parse(JSON.stringify(Ar))[0]
 
         await mysql.query(`update arti set pageviews='${Ar.pageviews+1}' where id='${Ar.id}'`)
         let res = await read(Ar.file)
-        return ctx.body={code:0,data:res,artiId:Ar.id}
+        return ctx.body={code:0 ,data:res ,artiId:Ar.id ,title:Ar.title}
     }catch (e) {
         logger.error(e)
         return ctx.body={code:1}
     }
-
-
 })
 //添加文章主题
 router.post('/topics/add',async (ctx)=>{

@@ -17,6 +17,12 @@ const Login = function (props) {
         let c = await getCaptcha();
         setCapt(c)
     }
+
+
+    useEffect(()=>{
+        document.title='均远--登录'
+    },[])
+
     useEffect(()=>{
         changeCapt();
         props.errorMsg('');
@@ -29,6 +35,7 @@ const Login = function (props) {
     useEffect(()=>{
         if(props.error){ return message.error(props.error) }
     },[props.error])
+
     return (
         <LoginBox>
             <Input placeholder='账号' onChange={(v)=>setName(v.target.value)}/>

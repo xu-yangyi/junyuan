@@ -79,15 +79,19 @@ const Article = (props) => {
     }
 
     useEffect(()=>{
+        let t='均远';
         const getArticle = async ()=>{
             const res = await axios.post('/articles/getContent',{file:f})
             if(res.status===200&&res.data.code===0){
+                t = t+"--"+res.data.title
                 setArtiId(res.data.artiId)
                 let result = mk.render(res.data.data)
                 setArticle(result)
             }else {
                 Router.push('/404')
             }
+            //设置文章的标题
+            document.title=t
         }
         getArticle()
 
