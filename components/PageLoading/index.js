@@ -1,4 +1,5 @@
-import { Spin } from 'antd/lib/index'
+import React from 'react'
+import { Spin } from 'antd'
 
 export default () => (
     <div className="root">
