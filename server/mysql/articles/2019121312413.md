@@ -1,0 +1,67 @@
+# 举例分析async/await执行顺序  
+这几天见到几道关于js执行顺序的题，普通js还好，但牵扯到async和await函数时几乎道道错，这就很郁闷了。痛定思痛，综合了几篇前辈的文章解析后，大概摸清了这个新语法的猫腻。特写此文。  
+  
+关于这俩的使用解析，可参考这几篇前辈写的文章：  
+1. https://juejin.im/post/59e85eebf265da430d571f89  
+2. https://segmentfault.com/a/1190000017224799  
+3. http://www.ruanyifeng.com/blog/2014/10/event-loop.html  
+  
+懂了基本执行机理后，直接上题目吧，自己为了验证，基于别人的例子修改过的。  
+```
+async function async1() {
+    console.log( '1' )
+    console.log(await async2())
+    console.log( '2' )
+}
+async function async2() {
+    console.log('3')
+    setTimeout(
+      ()=>console.log('4')
+    ,0)
+    console.log( '5' )
+}
+console.log( '6' )
+setTimeout( function () {
+    console.log( '7' )
+}, 0 )
+async1();
+new Promise( function ( resolve ) {
+    console.log( '8' )
+    resolve();
+} ).then( function () {
+    console.log( '9' )
+} )
+console.log( '10' )
+```  
+同样的，猜猜看，猜对了，说明你其实懂得差不多了，自然我下面写的都是废话不用看了。  
+答案是：  
+![pic](./articles/js/async/1.png)  
+## 个人鄙见  
+首先我们要知道两件事：  
+1. async声明的函数只是把该函数的return包装了，使得无论如何都会返回promise对象（非promise会转化为promise{resolve}），除此之外与普通函数没有不同，没有特殊待遇。  
+2. await声明只能用在async函数中。当执行async函数时，遇到await声明，会先将await后面的内容按照'平常的执行规则'执行完，执行完后立马跳出async函数，去执行主线程其他内容，等到主线程执行完再回到await处继续执行后面的内容。  
+  
+这里提到的平常的执行规则可能有点迷糊，其实就是平时怎么做，这里还怎么做。接下来我具体分析一遍。  
+## 步骤解析  
+1. 首先两个async函数声明直接跳过，因为只是声明，并没有执行,所以直接到了`console.log(6)`   
+   => 输出6  
+2. 下一行的setTimeout属于宏任务，先挂起。  
+   => 输出6　宏任务：setTimeout(输出7)  
+3. 下一行执行async1函数。我们跳到async1函数体内。首先`console.log(1)`直接输出。  
+   => 输出6 1　宏任务：setTimeout(输出7)  
+4. 紧接着`console.log(await async2())`，我上小节提到过，遇到await直接先执行await后面的内容，所以我们执行async2函数，进入async2函数体内。进入async2内后，我们按照正常的执行规则：输出3=>宏任务挂起`setTimeout(输出4)`=>输出5  
+   => 输出：6 1 3 5 ；宏任务：setTimeout(输出7) setTimeout(输出4)  
+6. 下一步还是按照我上节提到的，await后的内容执行完后立马跳出async函数，执行主线程其他内容。我们从async1中跳出，到Promise这里，因为Promise的立马执行，这里输出8=>resolve结束=>出来到then处，挂起输出9的微任务。再到最后一行输出10  
+   => 输出：6 1 3 5 8 10；宏任务：setTimeout(输出7) setTimeout(输出4)；微任务：输出9  
+7. 主线程其他内容执行完后，回到之前的await处继续执行，`console.log(await async2())`由于async2函数没有返回，返回undefined。之后再下一行输出2。至此第一轮主线程结束。  
+   => 输出：6 1 3 5 8 10 undefined 2；宏任务：setTimeout(输出7) setTimeout(输出4)；微任务：输出9  
+8. 主线程任务结束后，会先去清空微任务，于是输出9，第一次轮询结束  
+   => 输出：6 1 3 5 8 10 undefined 2 9；宏任务：setTimeout(输出7) setTimeout(输出4)  
+9. 紧接着下一次轮询，执行setTimeout(输出7)，执行完后再下一个，两次setTimeout(输出4)输出完，执行结束。  
+   => 输出：6 1 3 5 8 10 undefined 2 9 7 4；  
+  
+但眼尖的同学应该发现了，在输出9后还输出了一次undefined，但根据后面的代码信息提示可知（没有对应的VM行），这不是我们代码造成的，而是函数内部造成的。  
+这里我还没有找到很权威的答案，但有一说法是：await会将后面的内容默认转化为Promise并返回结果，即：await Promise.resolve()=>Promise.resolve(undefined).then((undefined) => {})  
+但即使这样，这个undefined的输出位置还是有点奇怪，如果有大佬知道，还望指点！  
+  
+以上内容也仅仅是个人的总结与思考，若有错误，还望指正！

@@ -43,3 +43,45 @@ TypeError: Cannot read property 'pageviews' of undefined
     at /app/junyuan/server/server-router.js:328:60
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
     at async session (/app/junyuan/node_modules/koa-session/index.js:41:7)
+Error: ER_DUP_ENTRY: Duplicate entry 'React跨域新版解决方案（v16.9）' for key 'title_UNIQUE'
+    at Query.Sequence._packetToError (/app/junyuan/node_modules/mysql/lib/protocol/sequences/Sequence.js:47:14)
+    at Query.ErrorPacket (/app/junyuan/node_modules/mysql/lib/protocol/sequences/Query.js:77:18)
+    at Protocol._parsePacket (/app/junyuan/node_modules/mysql/lib/protocol/Protocol.js:291:23)
+    at Parser._parsePacket (/app/junyuan/node_modules/mysql/lib/protocol/Parser.js:433:10)
+    at Parser.write (/app/junyuan/node_modules/mysql/lib/protocol/Parser.js:43:10)
+    at Protocol.write (/app/junyuan/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/app/junyuan/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/app/junyuan/node_modules/mysql/lib/Connection.js:525:10)
+    at Socket.emit (events.js:210:5)
+    at addChunk (_stream_readable.js:309:12)
+    --------------------
+    at Protocol._enqueue (/app/junyuan/node_modules/mysql/lib/protocol/Protocol.js:144:48)
+    at PoolConnection.query (/app/junyuan/node_modules/mysql/lib/Connection.js:201:25)
+    at /app/junyuan/server/mysql/index.js:20:32
+    at Handshake.onConnect (/app/junyuan/node_modules/mysql/lib/Pool.js:64:7)
+    at Handshake.<anonymous> (/app/junyuan/node_modules/mysql/lib/Connection.js:525:10)
+    at Handshake._callback (/app/junyuan/node_modules/mysql/lib/Connection.js:491:16)
+    at Handshake.Sequence.end (/app/junyuan/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Handshake.Sequence.OkPacket (/app/junyuan/node_modules/mysql/lib/protocol/sequences/Sequence.js:92:8)
+    at Protocol._parsePacket (/app/junyuan/node_modules/mysql/lib/protocol/Protocol.js:291:23)
+    at Parser._parsePacket (/app/junyuan/node_modules/mysql/lib/protocol/Parser.js:433:10) {
+  code: 'ER_DUP_ENTRY',
+  errno: 1062,
+  sqlMessage: "Duplicate entry 'React跨域新版解决方案（v16.9）' for key 'title_UNIQUE'",
+  sqlState: '23000',
+  index: 0,
+  sql: 'insert into arti (title,intro,file,pic,cls,create_time,pageviews) values\n' +
+    "                        ('React跨域新版解决方案（v16.9）','跨域问题必不可免，原本的proxy配置已经实现，我在这里总结了两种比较实用的react下的解决方案。','/app/junyuan/server/mysql/articles/20191211123553.md','/app/junyuan/public/articles/20191211123553.png','tec','20191211123553',0)"
+}
+TypeError: Cannot read property 'pageviews' of undefined
+    at /app/junyuan/server/server-router.js:328:60
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async session (/app/junyuan/node_modules/koa-session/index.js:41:7)
+TypeError: Cannot read property 'pageviews' of undefined
+    at /app/junyuan/server/server-router.js:328:60
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async session (/app/junyuan/node_modules/koa-session/index.js:41:7)
+TypeError: Cannot read property 'pageviews' of undefined
+    at /app/junyuan/server/server-router.js:328:60
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async session (/app/junyuan/node_modules/koa-session/index.js:41:7)
